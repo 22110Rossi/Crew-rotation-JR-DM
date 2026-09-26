@@ -1,53 +1,30 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>StimWell Services</title>
-
-<style>
-.page{display:none;}
-.active{display:block;}
-button{padding:10px;}
-</style>
-
-</head>
-<body>
-
-<div id="dashboard" class="active">
-
-<h1>StimWell Services</h1>
-
-<button onclick="showPage('rotation')">
-Open Crew Rotation
-</button>
-
-</div>
-
 <div id="rotation" class="page">
 
-<h2>Crew Rotation Page</h2>
+<h2>🚢 Crew Rotation</h2>
+
+<select id="crew">
+<option value="Jonathan">Jonathan</option>
+<option value="Dave">Dave</option>
+</select>
+
+<br><br>
+
+<input type="date" id="rotationDate">
+
+<br><br>
+
+<button onclick="checkRotation()">
+Check Status
+</button>
+
+<div id="rotationResult"></div>
+
+<div id="rotationInfo"></div>
+
+<br>
 
 <button onclick="showPage('dashboard')">
 Back
 </button>
 
 </div>
-
-<script>
-
-function showPage(page){
-
-document.getElementById("dashboard")
-.classList.remove("active");
-
-document.getElementById("rotation")
-.classList.remove("active");
-
-document.getElementById(page)
-.classList.add("active");
-
-}
-
-</script>
-
-</body>
-</html>
