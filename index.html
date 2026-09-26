@@ -4,79 +4,50 @@
 <title>StimWell Services</title>
 
 <style>
-body{
-font-family:Arial;
-background:#f2f2f7;
-padding:20px;
-}
-
-.card{
-background:white;
-padding:20px;
-border-radius:15px;
-margin-bottom:15px;
-}
-
-button{
-width:100%;
-padding:15px;
-background:#007AFF;
-color:white;
-border:none;
-border-radius:10px;
-}
-
-.logo{
-width:220px;
-height:140px;
-margin:auto;
-border:4px solid red;
-border-radius:25px;
-background:white;
-text-align:center;
-padding-top:25px;
-}
+.page{display:none;}
+.active{display:block;}
+button{padding:10px;}
 </style>
 
 </head>
-
 <body>
 
-<div class="logo">
+<div id="dashboard" class="active">
 
-<h1 style="color:#007AFF;">
-StimWell
-</h1>
+<h1>StimWell Services</h1>
 
-<h3 style="color:#007AFF;">
-SERVICES
-</h3>
-
-</div>
-
-<h1 style="text-align:center;">
-Offshore Crew Hub
-</h1>
-
-<div class="card">
-
-<h2>🚢 Crew Rotation</h2>
-
-<button>
+<button onclick="showPage('rotation')">
 Open Crew Rotation
 </button>
 
 </div>
 
-<div class="card">
+<div id="rotation" class="page">
 
-<h2>🇪🇺 Schengen Tracker</h2>
+<h2>Crew Rotation Page</h2>
 
-<button>
-Open Schengen Tracker
+<button onclick="showPage('dashboard')">
+Back
 </button>
 
 </div>
+
+<script>
+
+function showPage(page){
+
+document.getElementById("dashboard")
+.classList.remove("active");
+
+document.getElementById("rotation")
+.classList.remove("active");
+
+document.getElementById(page)
+.classList.add("active");
+
+}
+
+</script>
 
 </body>
 </html>
