@@ -1,76 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stimwell Crew Rotation</title>
-
+<title>Crew Rotation</title>
 <style>
 body{
-    font-family:Arial,sans-serif;
-    margin:0;
-    background:#f5f7fa;
+font-family:Arial;
+background:#f5f7fa;
+padding:20px;
 }
 
-header{
-    background:#003366;
-    color:white;
-    text-align:center;
-    padding:20px;
+.box{
+background:white;
+padding:20px;
+max-width:500px;
+margin:auto;
+border-radius:10px;
+box-shadow:0 2px 5px rgba(0,0,0,0.2);
 }
 
-.card{
-    max-width:700px;
-    margin:30px auto;
-    background:white;
-    padding:20px;
-    border-radius:10px;
-    box-shadow:0 2px 5px rgba(0,0,0,0.15);
+select,input,button{
+width:100%;
+padding:12px;
+margin:10px 0;
 }
 
-h2{
-    margin-top:0;
-}
-
-select,input{
-    width:100%;
-    padding:12px;
-    margin:10px 0;
-    box-sizing:border-box;
-}
-
-button{
-    width:100%;
-    padding:12px;
-    background:#0d6efd;
-    color:white;
-    border:none;
-    border-radius:5px;
-    cursor:pointer;
-    font-size:16px;
-}
-
-button:hover{
-    background:#0b5ed7;
-}
-
-.result{
-    margin-top:20px;
-    padding:20px;
-    border-radius:10px;
-    text-align:center;
-    color:white;
-    font-size:28px;
-    font-weight:bold;
+#result{
+padding:15px;
+margin-top:15px;
+border-radius:8px;
+text-align:center;
+font-weight:bold;
+font-size:24px;
 }
 </style>
 </head>
 <body>
 
-<header>
-    <h1>🌊 Stimwell Crew Rotation</h1>
-</header>
+<div class="box">
 
-<div class="card">
+<h2>Crew Status Checker</h2>
 
-    <h2>Crew Status
+<select id="crew">
+<option value="JR">JR Crew</option>
+<option value="DM">DM Crew</option>
+</select>
+
+<input type="date" id="date">
+
+<button 
