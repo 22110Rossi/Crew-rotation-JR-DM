@@ -1,162 +1,113 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>StimWell Services</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stimwell Services</title>
 
 <style>
 body{
-font-family:Arial;
-padding:20px;
-background:#f2f2f7;
+    font-family:Arial,sans-serif;
+    margin:0;
+    background:#f5f7fa;
+}
+
+header{
+    background:#003366;
+    color:white;
+    padding:15px;
+    text-align:center;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+}
+
+nav{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    padding:10px;
+    background:#002244;
+    flex-wrap:wrap;
+}
+
+nav button{
+    padding:10px 15px;
+    border:none;
+    background:#0d6efd;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
 }
 
 .page{
-display:none;
+    display:none;
+    padding:20px;
 }
 
 .active{
-display:block;
+    display:block;
 }
 
-button{
-padding:10px;
-width:100%;
-margin-top:10px;
+.card{
+    background:white;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:15px;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
 }
 
-.home{
-color:green;
-font-size:40px;
-font-weight:bold;
+input,select{
+    width:100%;
+    padding:10px;
+    margin:5px 0;
+    box-sizing:border-box;
 }
 
-.away{
-color:red;
-font-size:40px;
-font-weight:bold;
-}
-</style>
-
-</head>
-
-<body>
-
-<div id="dashboard" class="active">
-
-<h1>StimWell Services</h1>
-
-<button onclick="showPage('rotation')">
-Open Crew Rotation
-</button>
-
-</div>
-
-<div id="rotation" class="page">
-
-<h2>🚢 Crew Rotation</h2>
-
-<select id="crew">
-<option value="Jonathan">Jonathan</option>
-<option value="Dave">Dave</option>
-</select>
-
-<br><br>
-
-<input type="date" id="rotationDate">
-
-<br><br>
-
-<button onclick="checkRotation()">
-Check Status
-</button>
-
-<div id="rotationResult"></div>
-
-<div id="rotationInfo"></div>
-
-<br>
-
-<button onclick="showPage('dashboard')">
-Back
-</button>
-
-</div>
-
-<script>
-
-function showPage(page){
-
-document.getElementById("dashboard")
-.classList.remove("active");
-
-document.getElementById("rotation")
-.classList.remove("active");
-
-document.getElementById(page)
-.classList.add("active");
-
+button.action{
+    background:green;
+    color:white;
+    border:none;
+    padding:10px;
+    border-radius:5px;
+    cursor:pointer;
 }
 
-const rotations = [
-
-["2026-08-26","2026-09-23","Dave"],
-["2026-09-23","2026-10-21","Jonathan"],
-["2026-10-21","2026-11-18","Dave"],
-["2026-11-18","2026-12-16","Jonathan"],
-["2026-12-16","2027-01-13","Dave"],
-["2027-01-13","2027-02-10","Jonathan"],
-["2027-02-10","2027-03-10","Dave"],
-["2027-03-10","2027-04-07","Jonathan"],
-["2027-04-07","2027-05-05","Dave"],
-["2027-05-05","2027-06-02","Jonathan"],
-["2027-06-02","2027-06-30","Dave"],
-["2027-06-30","2027-07-28","Jonathan"],
-["2027-07-28","2027-08-25","Dave"],
-["2027-08-25","2027-09-22","Jonathan"],
-["2027-09-22","2027-10-20","Dave"],
-["2027-10-20","2027-11-17","Jonathan"],
-["2027-11-17","2027-12-15","Dave"],
-["2027-12-15","2028-01-12","Jonathan"]
-
-];
-
-function checkRotation(){
-
-const crew =
-document.getElementById("crew").value;
-
-const selected =
-new Date(document.getElementById("rotationDate").value);
-
-for(let r of rotations){
-
-const start = new Date(r[0]);
-const end = new Date(r[1]);
-
-if(selected >= start && selected < end){
-
-let status;
-
-if(crew==="Jonathan"){
-status = r[2]==="Dave" ? "HOME" : "AWAY";
-}else{
-status = r[2]==="Dave" ? "AWAY" : "HOME";
+.delete-btn{
+    background:red;
+    color:white;
+    border:none;
+    padding:5px 10px;
+    border-radius:5px;
+    cursor:pointer;
 }
 
-document.getElementById("rotationResult").innerHTML =
-"<h1>"+status+"</h1>";
-
-return;
+.status-badge{
+    padding:10px;
+    border-radius:5px;
+    color:white;
+    display:inline-block;
 }
 
+.success{
+    background:green;
 }
 
-document.getElementById("rotationResult").innerHTML =
-"OUT OF RANGE";
-
+.danger{
+    background:red;
 }
 
-</script>
+table{
+    width:100%;
+    border-collapse:collapse;
+}
 
-</body>
-</html>
+th,td{
+    border:1px solid #ddd;
+    padding:8px;
+}
+
+th{
+    
