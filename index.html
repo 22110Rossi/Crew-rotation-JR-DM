@@ -6,96 +6,97 @@
 <title>Stimwell Services</title>
 
 <style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background: #f5f7fa;
+body{
+    font-family:Arial,sans-serif;
+    margin:0;
+    background:#f5f7fa;
 }
 
-header {
-    background: #003366;
-    color: white;
-    padding: 15px;
-    text-align: center;
+header{
+    background:#003366;
+    color:white;
+    padding:15px;
+    text-align:center;
 }
 
-.logo {
-    font-size: 28px;
-    font-weight: bold;
+.logo{
+    font-size:28px;
+    font-weight:bold;
 }
 
-nav {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    padding: 10px;
-    background: #002244;
+nav{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    padding:10px;
+    background:#002244;
+    flex-wrap:wrap;
 }
 
-nav button {
-    padding: 10px 15px;
-    border: none;
-    background: #0d6efd;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
+nav button{
+    padding:10px 15px;
+    border:none;
+    background:#0d6efd;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
 }
 
-.page {
-    display: none;
-    padding: 20px;
+.page{
+    display:none;
+    padding:20px;
 }
 
-.active {
-    display: block;
+.active{
+    display:block;
 }
 
-.card {
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+.card{
+    background:white;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:15px;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
 }
 
-input, select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 8px;
-    margin-bottom: 8px;
-    box-sizing: border-box;
+input,select{
+    width:100%;
+    padding:10px;
+    margin-top:8px;
+    margin-bottom:8px;
+    box-sizing:border-box;
 }
 
-button.action {
-    background: green;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
+button.action{
+    background:green;
+    color:white;
+    border:none;
+    padding:10px;
+    border-radius:5px;
+    cursor:pointer;
 }
 
-.status-badge {
-    padding: 10px;
-    border-radius: 5px;
-    color: white;
-    display: inline-block;
-    background: green;
+.status-badge{
+    padding:10px;
+    border-radius:5px;
+    color:white;
+    display:inline-block;
+    background:green;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+table{
+    width:100%;
+    border-collapse:collapse;
 }
 
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
+th,td{
+    border:1px solid #ddd;
+    padding:8px;
 }
 
-th {
-    background: #003366;
-    color: white;
+th{
+    background:#003366;
+    color:white;
 }
 </style>
 </head>
@@ -125,18 +126,19 @@ th {
 </div>
 
 <div id="rotationPage" class="page">
+
     <div class="card">
         <h2>Crew Rotation</h2>
 
-       <input type="text" id="crewName" placeholder="Crew Name">
+        <input type="text" id="crewName" placeholder="Crew Name">
 
-<select id="crewStatus">
-    <option value="Home">Home</option>
-    <option value="Away">Away</option>
-</select>
+        <select id="crewStatus">
+            <option value="Home">Home</option>
+            <option value="Away">Away</option>
+        </select>
 
-<input type="date" id="onDate">
-<input type="date" id="offDate">
+        <input type="date" id="onDate">
+        <input type="date" id="offDate">
 
         <button class="action" onclick="addRotation()">
             Save Rotation
@@ -146,10 +148,27 @@ th {
     <div class="card">
         <div id="rotationList"></div>
     </div>
+
+</div>
+
+<div id="schengenPage" class="page">
+
+    <div class="card">
+        <h2>Schengen Tracker</h2>
+
+        <p>
+            Schengen tracker placeholder.
+            The full automatic day counter can be added later.
+        </p>
+
+    </div>
+
 </div>
 
 <div id="vesselPage" class="page">
+
     <div class="card">
+
         <h2>Vessel Status</h2>
 
         <select id="vesselState">
@@ -163,129 +182,27 @@ th {
         <button class="action" onclick="saveVesselStatus()">
             Update Status
         </button>
+
     </div>
 
     <div class="card">
         <div id="vesselDisplay"></div>
     </div>
+
 </div>
 
 <script>
 
-let rotations = JSON.parse(localStorage.getItem("rotations")) || [];
+let rotations =
+    JSON.parse(localStorage.getItem("rotations")) || [];
 
-function showPage(pageId) {
-    document.querySelectorAll(".page").forEach(page => {
+function showPage(pageId){
+
+    document.querySelectorAll(".page").forEach(page=>{
         page.classList.remove("active");
     });
 
     document.getElementById(pageId).classList.add("active");
 }
 
-function renderRotations() {
-
-    let html = `
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Status</th>
-            <th>On Date</th>
-            <th>Off Date</th>
-        </tr>
-    `;
-
-    rotations.forEach(r => {
-
-        html += `
-        <tr>
-            <td>${r.name}</td>
-            <td>${r.status}</td>
-            <td>${r.onDate || "-"}</td>
-            <td>${r.offDate || "-"}</td>
-        </tr>
-        `;
-    });
-
-    html += "</table>";
-
-    document.getElementById("rotationList").innerHTML = html;
-}
-
-    rotations.push({
-        name: name,
-        onDate: onDate,
-        offDate: offDate
-    });
-
-    localStorage.setItem(
-        "rotations",
-        JSON.stringify(rotations)
-    );
-
-    renderRotations();
-}
-
-function renderRotations() {
-
-    let html = `
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>On</th>
-            <th>Off</th>
-        </tr>
-    `;
-
-    rotations.forEach(r => {
-        html += `
-        <tr>
-            <td>${r.name}</td>
-            <td>${r.onDate}</td>
-            <td>${r.offDate}</td>
-        </tr>
-        `;
-    });
-
-    html += "</table>";
-
-    document.getElementById("rotationList").innerHTML = html;
-}
-
-function saveVesselStatus() {
-
-    const status = document.getElementById("vesselState").value;
-    const port = document.getElementById("portName").value;
-    const job = document.getElementById("jobName").value;
-
-    localStorage.setItem("vesselStatus", status);
-    localStorage.setItem("vesselPort", port);
-    localStorage.setItem("vesselJob", job);
-
-    renderVesselStatus();
-}
-
-function renderVesselStatus() {
-
-    const status = localStorage.getItem("vesselStatus") || "";
-    const port = localStorage.getItem("vesselPort") || "";
-    const job = localStorage.getItem("vesselJob") || "";
-
-    document.getElementById("vesselDisplay").innerHTML = `
-        <h3>Current Vessel Status</h3>
-        <p><strong>Status:</strong> ${status}</p>
-        <p><strong>Port:</strong> ${port}</p>
-        <p><strong>Job:</strong> ${job}</p>
-    `;
-
-    if(status){
-        document.getElementById("vesselStatusBadge").textContent = status;
-    }
-}
-
-renderRotations();
-renderVesselStatus();
-
-</script>
-
-</body>
-</html>
+function addRotation
