@@ -205,4 +205,118 @@ function showPage(pageId){
     document.getElementById(pageId).classList.add("active");
 }
 
-function addRotation
+function addRotation(){
+
+    const name =
+        document.getElementById("crewName").value;
+
+    const status =
+        document.getElementById("crewStatus").value;
+
+    const onDate =
+        document.getElementById("onDate").value;
+
+    const offDate =
+        document.getElementById("offDate").value;
+
+    if(name===""){
+        return;
+    }
+
+    rotations.push({
+        name:name,
+        status:status,
+        onDate:onDate,
+        offDate:offDate
+    });
+
+    localStorage.setItem(
+        "rotations",
+        JSON.stringify(rotations)
+    );
+
+    renderRotations();
+
+    document.getElementById("crewName").value="";
+    document.getElementById("onDate").value="";
+    document.getElementById("offDate").value="";
+}
+
+function renderRotations(){
+
+    let html=`
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Status</th>
+            <th>On Date</th>
+            <th>Off Date</th>
+        </tr>
+    `;
+
+    rotations.forEach(r=>{
+
+        html+=`
+        <tr>
+            <td>${r.name}</td>
+            <td>${r.status}</td>
+            <td>${r.onDate || "-"}</td>
+            <td>${r.offDate || "-"}</td>
+        </tr>
+        `;
+
+    });
+
+    html+="</table>";
+
+    document.getElementById("rotationList").innerHTML=html;
+}
+
+function saveVesselStatus(){
+
+    const status =
+        document.getElementById("vesselState").value;
+
+    const port =
+        document.getElementById("portName").value;
+
+    const job =
+        document.getElementById("jobName").value;
+
+    localStorage.setItem("vesselStatus",status);
+    localStorage.setItem("vesselPort",port);
+    localStorage.setItem("vesselJob",job);
+
+    renderVesselStatus();
+}
+
+function renderVesselStatus(){
+
+    const status =
+        localStorage.getItem("vesselStatus") || "";
+
+    const port =
+        localStorage.getItem("vesselPort") || "";
+
+    const job =
+        localStorage.getItem("vesselJob") || "";
+
+    document.getElementById("vesselDisplay").innerHTML=`
+        <h3>Current Vessel Status</h3>
+        <p><strong>Status:</strong> ${status}</p>
+        <p><strong>Port:</strong> ${port}</p>
+        <p><strong>Job:</strong> ${job}</p>
+    `;
+
+    if(status){
+        document.getElementById("vesselStatusBadge").textContent=status;
+    }
+}
+
+renderRotations();
+renderVesselStatus();
+
+</script>
+
+</body>
+</html>
