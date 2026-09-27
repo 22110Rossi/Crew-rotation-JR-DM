@@ -182,15 +182,34 @@ function showPage(pageId) {
     document.getElementById(pageId).classList.add("active");
 }
 
-function addRotation() {
+function renderRotations() {
 
-    const name = document.getElementById("crewName").value;
-    const onDate = document.getElementById("onDate").value;
-    const offDate = document.getElementById("offDate").value;
+    let html = `
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Status</th>
+            <th>On Date</th>
+            <th>Off Date</th>
+        </tr>
+    `;
 
-    if (!name || !onDate || !offDate) {
-        return;
-    }
+    rotations.forEach(r => {
+
+        html += `
+        <tr>
+            <td>${r.name}</td>
+            <td>${r.status}</td>
+            <td>${r.onDate || "-"}</td>
+            <td>${r.offDate || "-"}</td>
+        </tr>
+        `;
+    });
+
+    html += "</table>";
+
+    document.getElementById("rotationList").innerHTML = html;
+}
 
     rotations.push({
         name: name,
