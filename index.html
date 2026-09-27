@@ -128,9 +128,15 @@ th {
     <div class="card">
         <h2>Crew Rotation</h2>
 
-        <input type="text" id="crewName" placeholder="Crew Name">
-        <input type="date" id="onDate">
-        <input type="date" id="offDate">
+       <input type="text" id="crewName" placeholder="Crew Name">
+
+<select id="crewStatus">
+    <option value="Home">Home</option>
+    <option value="Away">Away</option>
+</select>
+
+<input type="date" id="onDate">
+<input type="date" id="offDate">
 
         <button class="action" onclick="addRotation()">
             Save Rotation
