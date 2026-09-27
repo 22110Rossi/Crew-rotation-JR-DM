@@ -1,10 +1,105 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stimwell Crew Rotation</title>
+
+<style>
+body{
+    font-family:Arial, sans-serif;
+    background:#f5f7fa;
+    margin:0;
+}
+
+header{
+    background:#003366;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    max-width:700px;
+    margin:30px auto;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+
+select,input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    box-sizing:border-box;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#0d6efd;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.result{
+    margin-top:20px;
+    padding:15px;
+    border-radius:8px;
+    text-align:center;
+    color:white;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.info{
+    margin-top:15px;
+    font-size:18px;
+    text-align:center;
+}
+</style>
+</head>
 <body>
 
-<h1>Stimwell Test</h1>
+<header>
+    <h1>🌊 Stimwell Crew Rotation</h1>
+</header>
 
-<button onclick="alert('Working')">Click Me</button>
+<div class="container">
+    <div class="card">
 
-</body>
-</html>
+        <h2>Select Crew Member</h2>
+
+        <select id="crewMember" onchange="loadCrew()">
+            <option value="Jonathan">Jonathan</option>
+            <option value="Dave">Dave</option>
+        </select>
+
+        <label>On Vessel Date</label>
+        <input type="date" id="onDate">
+
+        <label>Off Vessel Date</label>
+        <input type="date" id="offDate">
+
+        <button onclick="saveRotation()">
+            Save Rotation
+        </button>
+
+        <div id="statusResult" class="result"></div>
+
+        <div class="info" id="dateInfo"></div>
+
+    </div>
+</div>
+
+<script>
+
+function loadCrew(
