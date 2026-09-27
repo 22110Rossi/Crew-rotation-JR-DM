@@ -1,50 +1,178 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Crew Rotation</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stimwell Crew Rotation</title>
+
 <style>
 body{
-font-family:Arial;
-background:#f5f7fa;
-padding:20px;
+    font-family:Arial,sans-serif;
+    margin:0;
+    background:#f5f7fa;
 }
 
-.box{
-background:white;
-padding:20px;
-max-width:500px;
-margin:auto;
-border-radius:10px;
-box-shadow:0 2px 5px rgba(0,0,0,0.2);
+header{
+    background:#003366;
+    color:white;
+    text-align:center;
+    padding:20px;
 }
 
-select,input,button{
-width:100%;
-padding:12px;
-margin:10px 0;
+.card{
+    max-width:700px;
+    margin:30px auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 5px rgba(0,0,0,0.15);
 }
 
-#result{
-padding:15px;
-margin-top:15px;
-border-radius:8px;
-text-align:center;
-font-weight:bold;
-font-size:24px;
+h2{
+    margin-top:0;
+}
+
+select,input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    box-sizing:border-box;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#0d6efd;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#0b5ed7;
+}
+
+.result{
+    margin-top:20px;
+    padding:20px;
+    border-radius:10px;
+    text-align:center;
+    color:white;
+    font-size:28px;
+    font-weight:bold;
 }
 </style>
 </head>
 <body>
 
-<div class="box">
+<header>
+    <h1>🌊 Stimwell Crew Rotation</h1>
+</header>
 
-<h2>Crew Status Checker</h2>
+<div class="card">
 
-<select id="crew">
-<option value="JR">JR Crew</option>
-<option value="DM">DM Crew</option>
-</select>
+    <h2>Crew Status Checker</h2>
 
-<input type="date" id="date">
+    <select id="crew">
+        <option value="Jonathan">JR Crew</option>
+        <option value="Dave">DM Crew</option>
+    </select>
 
-<button 
+    <input type="date" id="checkDate">
+
+    <button onclick="checkStatus()">
+        Check Status
+    </button>
+
+    <div id="result" class="result" style="display:none;"></div>
+
+</div>
+
+<script>
+
+const rota = [
+
+{crew:"Dave",start:"2026-08-26",end:"2026-09-23"},
+{crew:"Jonathan",start:"2026-09-23",end:"2026-10-21"},
+{crew:"Dave",start:"2026-10-21",end:"2026-11-18"},
+{crew:"Jonathan",start:"2026-11-18",end:"2026-12-16"},
+{crew:"Dave",start:"2026-12-16",end:"2027-01-13"},
+{crew:"Jonathan",start:"2027-01-13",end:"2027-02-10"},
+{crew:"Dave",start:"2027-02-10",end:"2027-03-10"},
+{crew:"Jonathan",start:"2027-03-10",end:"2027-04-07"},
+{crew:"Dave",start:"2027-04-07",end:"2027-05-05"},
+{crew:"Jonathan",start:"2027-05-05",end:"2027-06-02"},
+{crew:"Dave",start:"2027-06-02",end:"2027-06-30"},
+{crew:"Jonathan",start:"2027-06-30",end:"2027-07-28"},
+{crew:"Dave",start:"2027-07-28",end:"2027-08-25"},
+{crew:"Jonathan",start:"2027-08-25",end:"2027-09-22"},
+{crew:"Dave",start:"2027-09-22",end:"2027-10-20"},
+{crew:"Jonathan",start:"2027-10-20",end:"2027-11-17"},
+{crew:"Dave",start:"2027-11-17",end:"2027-12-15"},
+{crew:"Jonathan",start:"2027-12-15",end:"2028-01-12"}
+
+];
+
+function checkStatus(){
+
+    const selectedCrew =
+        document.getElementById("crew").value;
+
+    const selectedDate =
+        document.getElementById("checkDate").value;
+
+    if(selectedDate === ""){
+        alert("Please select a date");
+        return;
+    }
+
+    const date = new Date(selectedDate);
+
+    let activeCrew = "";
+
+    rota.forEach(item => {
+
+        const start = new Date(item.start);
+        const end = new Date(item.end);
+
+        if(date >= start && date < end){
+            activeCrew = item.crew;
+        }
+
+    });
+
+    const result =
+        document.getElementById("result");
+
+    result.style.display = "block";
+
+    if(selectedCrew === activeCrew){
+
+        result.style.background = "#dc3545";
+
+        if(selectedCrew === "Jonathan"){
+            result.innerHTML = "🚢 JR CREW AWAY";
+        } else {
+            result.innerHTML = "🚢 DM CREW AWAY";
+        }
+
+    } else {
+
+        result.style.background = "#198754";
+
+        if(selectedCrew === "Jonathan"){
+            result.innerHTML = "✅ JR CREW HOME";
+        } else {
+            result.innerHTML = "✅ DM CREW HOME";
+        }
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
