@@ -7,9 +7,9 @@
 
 <style>
 body{
-    font-family:Arial, sans-serif;
-    background:#f5f7fa;
+    font-family:Arial,sans-serif;
     margin:0;
+    background:#f5f7fa;
 }
 
 header{
@@ -19,17 +19,17 @@ header{
     padding:20px;
 }
 
-.container{
+.card{
     max-width:700px;
     margin:30px auto;
-    padding:20px;
-}
-
-.card{
     background:white;
     padding:20px;
     border-radius:10px;
-    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+    box-shadow:0 2px 5px rgba(0,0,0,0.15);
+}
+
+h2{
+    margin-top:0;
 }
 
 select,input{
@@ -50,20 +50,18 @@ button{
     font-size:16px;
 }
 
-.result{
-    margin-top:20px;
-    padding:15px;
-    border-radius:8px;
-    text-align:center;
-    color:white;
-    font-size:24px;
-    font-weight:bold;
+button:hover{
+    background:#0b5ed7;
 }
 
-.info{
-    margin-top:15px;
-    font-size:18px;
+.result{
+    margin-top:20px;
+    padding:20px;
+    border-radius:10px;
     text-align:center;
+    color:white;
+    font-size:28px;
+    font-weight:bold;
 }
 </style>
 </head>
@@ -73,33 +71,98 @@ button{
     <h1>🌊 Stimwell Crew Rotation</h1>
 </header>
 
-<div class="container">
-    <div class="card">
+<div class="card">
 
-        <h2>Select Crew Member</h2>
+    <h2>Check Crew Status</h2>
 
-        <select id="crewMember" onchange="loadCrew()">
-            <option value="Jonathan">Jonathan</option>
-            <option value="Dave">Dave</option>
-        </select>
+    <select id="crew">
+        <option>Jonathan</option>
+        <option>Dave</option>
+    </select>
 
-        <label>On Vessel Date</label>
-        <input type="date" id="onDate">
+    <input type="date" id="checkDate">
 
-        <label>Off Vessel Date</label>
-        <input type="date" id="offDate">
+    <button onclick="checkStatus()">Check Status</button>
 
-        <button onclick="saveRotation()">
-            Save Rotation
-        </button>
+    <div id="result" class="result" style="display:none;"></div>
 
-        <div id="statusResult" class="result"></div>
-
-        <div class="info" id="dateInfo"></div>
-
-    </div>
 </div>
 
 <script>
 
-function loadCrew(
+const rota = [
+
+{crew:"Dave",start:"2026-08-26",end:"2026-09-23"},
+{crew:"Jonathan",start:"2026-09-23",end:"2026-10-21"},
+{crew:"Dave",start:"2026-10-21",end:"2026-11-18"},
+{crew:"Jonathan",start:"2026-11-18",end:"2026-12-16"},
+{crew:"Dave",start:"2026-12-16",end:"2027-01-13"},
+{crew:"Jonathan",start:"2027-01-13",end:"2027-02-10"},
+{crew:"Dave",start:"2027-02-10",end:"2027-03-10"},
+{crew:"Jonathan",start:"2027-03-10",end:"2027-04-07"},
+{crew:"Dave",start:"2027-04-07",end:"2027-05-05"},
+{crew:"Jonathan",start:"2027-05-05",end:"2027-06-02"},
+{crew:"Dave",start:"2027-06-02",end:"2027-06-30"},
+{crew:"Jonathan",start:"2027-06-30",end:"2027-07-28"},
+{crew:"Dave",start:"2027-07-28",end:"2027-08-25"},
+{crew:"Jonathan",start:"2027-08-25",end:"2027-09-22"},
+{crew:"Dave",start:"2027-09-22",end:"2027-10-20"},
+{crew:"Jonathan",start:"2027-10-20",end:"2027-11-17"},
+{crew:"Dave",start:"2027-11-17",end:"2027-12-15"},
+{crew:"Jonathan",start:"2027-12-15",end:"2028-01-12"}
+
+];
+
+function checkStatus(){
+
+    const selectedCrew =
+        document.getElementById("crew").value;
+
+    const selectedDate =
+        document.getElementById("checkDate").value;
+
+    if(selectedDate === ""){
+        alert("Please select a date.");
+        return;
+    }
+
+    const checkDate = new Date(selectedDate);
+
+    let activeCrew = "";
+
+    rota.forEach(item => {
+
+        const start = new Date(item.start);
+        const end = new Date(item.end);
+
+        if(checkDate >= start && checkDate < end){
+            activeCrew = item.crew;
+        }
+
+    });
+
+    const result =
+        document.getElementById("result");
+
+    result.style.display = "block";
+
+    if(selectedCrew === activeCrew){
+
+        result.style.background = "#dc3545";
+        result.innerHTML =
+            "🚢 " + selectedCrew.toUpperCase() + " IS AWAY";
+
+    }else{
+
+        result.style.background = "#198754";
+        result.innerHTML =
+            "✅ " + selectedCrew.toUpperCase() + " IS HOME";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
